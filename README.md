@@ -557,21 +557,23 @@ Additional relationships, including ticket assignment to agents and conversation
 - [x] Initialize Git repository
 - [x] Publish project to GitHub
 
-### Phase 2 — Database & Authentication
+### Phase 2: Authentication and Database
 
-- [x] Install and configure PostgreSQL
-- [x] Configure Prisma ORM
-- [x] Create database schema
-- [x] Implement database migrations
+- [x] Configure PostgreSQL
+- [x] Configure Prisma
+- [x] Create User and Ticket models
+- [x] Apply initial database migration
 - [x] Generate Prisma Client
-- [x] Implement user registration
-- [x] Add password hashing using bcrypt
-- [x] Add request validation using Zod
-- [ ] Test registration API
-- [ ] Implement login
-- [ ] Implement JWT authentication
-- [ ] Implement authentication middleware
-- [ ] Implement role-based authorization
+- [x] Implement registration API
+- [x] Test registration API
+- [x] Prevent duplicate registration
+- [x] Implement login
+- [x] Implement bcrypt password verification
+- [x] Implement JWT authentication
+- [x] Implement authentication middleware
+- [x] Implement role-based authorization
+- [x] Test CUSTOMER authorization
+- [x] Test ADMIN authorization
 
 ### Phase 3 — Ticket Management
 
