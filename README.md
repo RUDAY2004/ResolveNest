@@ -6,8 +6,26 @@ ResolveNest is a full-stack customer support platform designed to streamline tic
 
 The platform aims to help customers raise support requests, enable agents to manage and resolve tickets efficiently, and provide administrators with visibility into support operations.
 
-> 🚧 **Project Status:** In Development  
-> Currently implemented: initial frontend, backend API, and frontend-to-backend connectivity. Database integration, authentication, ticket management, and AI capabilities are planned for upcoming development phases.
+> 🚧 **Project Status: In Development**
+>
+> **Phase 1 — Project Foundation:** Completed  
+> **Phase 2 — Database & Authentication:** In Progress
+
+### Currently Implemented
+
+- Initial frontend and backend setup
+- React and TypeScript frontend
+- Express and TypeScript backend
+- Frontend-to-backend connectivity
+- PostgreSQL database integration
+- Prisma ORM configuration
+- Database schema and initial migration
+- User and ticket database models
+- User registration API implementation
+- Password hashing using bcrypt
+- Request validation using Zod
+
+Login, JWT authentication, role-based authorization, ticket management, AI capabilities, and deployment are being developed in upcoming phases.
 
 ---
 
@@ -19,11 +37,11 @@ The platform aims to help customers raise support requests, enable agents to man
 - [Technology Stack](#-technology-stack)
 - [Planned Features](#-planned-features)
 - [Project Structure](#-project-structure)
-- [Getting Started](#-getting-started)
+- [Getting Started](#️-getting-started)
 - [Environment Configuration](#-environment-configuration)
 - [API Overview](#-api-overview)
-- [Database Design](#-database-design)
-- [Development Roadmap](#-development-roadmap)
+- [Database Design](#️-database-design)
+- [Development Roadmap](#️-development-roadmap)
 - [Security](#-security)
 - [Contributing](#-contributing)
 - [Author](#-author)
@@ -66,7 +84,7 @@ ResolveNest follows a modular client-server architecture.
 
 The frontend communicates with the backend through REST APIs. The backend handles application logic, authentication, ticket workflows, and database operations.
 
-PostgreSQL will serve as the primary database. Prisma will provide database access and schema management.
+PostgreSQL serves as the primary database. Prisma provides database access, schema management, and migrations.
 
 Redis and BullMQ are planned for background processing, while AI integration will provide intelligent support assistance.
 
@@ -120,7 +138,7 @@ flowchart TD
     Queue -.-> Redis
 ```
 
-> **Note:** This architecture represents the planned application design. PostgreSQL, Prisma, Redis, BullMQ, authentication, and AI integration are not yet implemented.
+> **Architecture Note:** The diagram represents the planned application architecture. PostgreSQL, Prisma, the initial database schema, and registration implementation are currently integrated. Login, JWT authentication, ticket workflows, AI integration, Redis, and BullMQ are still under development.
 
 ### Architecture Responsibilities
 
@@ -154,20 +172,22 @@ flowchart TD
 - **Node.js** – JavaScript runtime
 - **Express.js** – REST API framework
 - **TypeScript** – Type-safe backend development
-- **Zod** – Planned request validation
+- **Zod** – Request validation
+- **bcrypt** – Password hashing
 - **JWT** – Planned authentication
-- **bcrypt** – Planned password hashing
 
 ### Database & Infrastructure
 
-- **PostgreSQL** – Planned relational database
-- **Prisma ORM** – Planned database access and migrations
+- **PostgreSQL** – Relational database
+- **Prisma ORM** – Database access, schema management, and migrations
 - **Redis** – Planned caching and queue infrastructure
 - **BullMQ** – Planned background job processing
 - **Docker** – Planned containerization
 - **GitHub Actions** – Planned CI/CD automation
 
 ### AI Integration
+
+Planned AI capabilities:
 
 - AI-powered ticket classification
 - Priority recommendations
@@ -182,7 +202,8 @@ AI functionality will be implemented in a later development phase.
 
 ### 1. Authentication & Authorization
 
-- User registration and login
+- User registration
+- User login
 - Secure password hashing
 - JWT-based authentication
 - Role-based access control
@@ -246,14 +267,14 @@ ResolveNest/
 │
 ├── apps/
 │   │
-│   ├── web/                    # React frontend
+│   ├── web/                       # React frontend
 │   │   ├── public/
 │   │   ├── src/
 │   │   │   ├── assets/
-│   │   │   ├── services/       # API communication
-│   │   │   ├── components/     # Planned reusable components
-│   │   │   ├── pages/          # Planned application pages
-│   │   │   ├── hooks/           # Planned custom hooks
+│   │   │   ├── services/          # API communication
+│   │   │   ├── components/        # Reusable components
+│   │   │   ├── pages/             # Application pages
+│   │   │   ├── hooks/             # Custom hooks
 │   │   │   ├── App.tsx
 │   │   │   ├── App.css
 │   │   │   ├── index.css
@@ -261,23 +282,31 @@ ResolveNest/
 │   │   ├── package.json
 │   │   └── vite.config.ts
 │   │
-│   └── api/                    # Express backend
+│   └── api/                       # Express backend
+│       ├── prisma/
+│       │   ├── schema.prisma      # Database schema
+│       │   └── migrations/         # Database migrations
 │       ├── src/
-│       │   ├── app.ts           # Express application
-│       │   └── server.ts         # Server entry point
+│       │   ├── controllers/        # Request controllers
+│       │   ├── generated/          # Generated Prisma Client
+│       │   ├── lib/                # Shared backend utilities
+│       │   ├── routes/              # API routes
+│       │   ├── app.ts               # Express application
+│       │   └── server.ts             # Server entry point
+│       ├── prisma.config.ts
 │       ├── package.json
 │       └── tsconfig.json
 │
 ├── packages/
-│   └── shared/                  # Shared TypeScript definitions
+│   └── shared/                     # Shared TypeScript definitions
 │       ├── src/
 │       │   └── index.ts
 │       ├── package.json
 │       └── tsconfig.json
 │
 ├── docs/
-│   ├── architecture/             # Planned architecture documentation
-│   └── api/                     # Planned API documentation
+│   ├── architecture/                # Architecture documentation
+│   └── api/                        # API documentation
 │
 ├── .gitignore
 ├── package.json
@@ -298,9 +327,8 @@ Install the following before running the application:
 - Node.js 20 or compatible version
 - npm
 - Git
+- PostgreSQL
 - Visual Studio Code (recommended)
-
-PostgreSQL will be required when database integration is implemented.
 
 ### 1. Clone the Repository
 
@@ -320,7 +348,11 @@ cd ResolveNest
 npm install
 ```
 
-### 4. Start the Development Servers
+### 4. Configure Environment Variables
+
+Create the backend and frontend environment files as described in [Environment Configuration](#-environment-configuration).
+
+### 5. Start the Development Servers
 
 ```bash
 npm run dev
@@ -328,7 +360,7 @@ npm run dev
 
 The root development script starts the frontend and backend concurrently.
 
-### 5. Access the Application
+### 6. Access the Application
 
 | Service | URL |
 |---|---|
@@ -346,7 +378,7 @@ The backend and frontend use environment variables for configuration.
 
 ### Backend
 
-Create the following file:
+Create:
 
 `apps/api/.env`
 
@@ -358,6 +390,10 @@ DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/resolvenest?sch
 
 JWT_SECRET=replace_with_a_secure_random_secret
 ```
+
+Replace `YOUR_PASSWORD` with your local PostgreSQL password.
+
+Generate a secure JWT secret before implementing JWT authentication.
 
 ### Frontend
 
@@ -372,11 +408,10 @@ VITE_API_URL=http://localhost:5000/api
 ### Important
 
 - Replace placeholder database credentials with your local PostgreSQL configuration.
-- Generate a secure JWT secret before implementing authentication.
 - Never commit `.env` files or real credentials.
 - Keep production secrets in environment-specific configuration.
-
-Database and authentication configuration will become active when their respective features are implemented.
+- Use a strong JWT secret when authentication is implemented.
+- Ensure environment files are excluded from Git.
 
 ---
 
@@ -390,51 +425,120 @@ ResolveNest uses REST APIs for communication between the frontend and backend.
 |---|---|---|
 | GET | `/` | Returns API welcome message |
 | GET | `/api/health` | Checks backend health |
+| POST | `/api/auth/register` | Registers a user |
 
-### Planned Ticket APIs
+### Registration API
+
+**Endpoint:**
+
+```http
+POST /api/auth/register
+```
+
+**Request Body:**
+
+```json
+{
+  "name": "Example User",
+  "email": "user@example.com",
+  "password": "ExamplePassword123"
+}
+```
+
+The registration implementation includes:
+
+- Request validation using Zod
+- Password hashing using bcrypt
+- Duplicate email checking
+- User creation through Prisma
+- Excluding the password from the response
+
+### Planned APIs
 
 | Method | Endpoint | Description |
 |---|---|---|
-| POST | `/api/auth/register` | Register a user |
 | POST | `/api/auth/login` | Authenticate a user |
 | GET | `/api/tickets` | Retrieve tickets |
 | POST | `/api/tickets` | Create a ticket |
 | GET | `/api/tickets/:id` | Retrieve ticket details |
 | PATCH | `/api/tickets/:id` | Update ticket |
-| DELETE | `/api/tickets/:id` | Delete a ticket |
+| DELETE | `/api/tickets/:id` | Delete ticket |
 | POST | `/api/tickets/:id/assign` | Assign a ticket |
 | POST | `/api/tickets/:id/comments` | Add a conversation message |
 
-> The ticket and authentication endpoints are planned and are not currently available.
+Login, JWT authentication, authorization, and ticket endpoints are planned and are not yet implemented.
 
 ---
 
 ## 🗄️ Database Design
 
-PostgreSQL is planned as the primary relational database.
+PostgreSQL is the primary relational database.
 
-Prisma will be used to define models, manage migrations, and access database records.
+Prisma is used to define models, manage migrations, generate the Prisma Client, and access database records.
 
-### Planned Entities
+### Implemented Models
 
 | Entity | Purpose |
 |---|---|
 | User | Customer, agent, and administrator accounts |
 | Ticket | Support request details and status |
+
+### User Model
+
+The User model includes:
+
+- Unique user ID
+- Name
+- Unique email
+- Hashed password
+- User role
+- Created timestamp
+- Updated timestamp
+
+### Ticket Model
+
+The Ticket model includes:
+
+- Unique ticket ID
+- Title
+- Description
+- Ticket status
+- Ticket priority
+- Customer relationship
+- Created timestamp
+- Updated timestamp
+
+### Implemented Enums
+
+| Enum | Values |
+|---|---|
+| UserRole | CUSTOMER, AGENT, ADMIN |
+| TicketStatus | OPEN, IN_PROGRESS, RESOLVED, CLOSED |
+| TicketPriority | LOW, MEDIUM, HIGH, URGENT |
+
+### Implemented Relationships
+
+- A user can create multiple tickets.
+- A ticket belongs to a customer.
+
+### Database Setup
+
+- PostgreSQL configured locally
+- Prisma ORM configured
+- Database schema created
+- Initial migration applied
+- Prisma Client generated
+
+### Planned Entities
+
+| Entity | Purpose |
+|---|---|
 | TicketComment | Customer-agent conversation |
 | TicketCategory | Ticket classification |
 | Notification | User notifications |
 | TicketActivity | Ticket history and audit events |
 
-### Planned Relationships
-
-- A user can create multiple tickets.
-- A ticket belongs to a customer.
-- A ticket can be assigned to a support agent.
-- A ticket can contain multiple conversation messages.
-- Ticket activity records track changes over time.
-
-The database schema will be introduced during the PostgreSQL and Prisma implementation phase.
+Additional relationships, including ticket assignment to agents and conversation threads, will be implemented in upcoming phases.
 
 ---
 
@@ -455,12 +559,18 @@ The database schema will be introduced during the PostgreSQL and Prisma implemen
 
 ### Phase 2 — Database & Authentication
 
-- [ ] Install and configure PostgreSQL
-- [ ] Configure Prisma ORM
-- [ ] Create database schema
-- [ ] Implement database migrations
-- [ ] Implement user registration
-- [ ] Implement login and JWT authentication
+- [x] Install and configure PostgreSQL
+- [x] Configure Prisma ORM
+- [x] Create database schema
+- [x] Implement database migrations
+- [x] Generate Prisma Client
+- [x] Implement user registration
+- [x] Add password hashing using bcrypt
+- [x] Add request validation using Zod
+- [ ] Test registration API
+- [ ] Implement login
+- [ ] Implement JWT authentication
+- [ ] Implement authentication middleware
 - [ ] Implement role-based authorization
 
 ### Phase 3 — Ticket Management
@@ -497,7 +607,7 @@ The database schema will be introduced during the PostgreSQL and Prisma implemen
 
 ## 🔒 Security
 
-Security considerations for the planned production application include:
+Security considerations for ResolveNest include:
 
 - Password hashing using bcrypt
 - JWT-based authentication
@@ -509,7 +619,7 @@ Security considerations for the planned production application include:
 - Protection against unauthorized ticket access
 - Input validation and error handling
 
-Security controls will be implemented and tested as the corresponding application features are developed.
+Password hashing and registration validation are implemented. JWT authentication, authorization, and additional security controls will be implemented and tested as the corresponding features are developed.
 
 ---
 
