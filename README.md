@@ -9,7 +9,7 @@ The platform aims to help customers raise support requests, enable agents to man
 > 🚧 **Project Status: In Development**
 >
 > **Phase 1 — Project Foundation:** Completed  
-> **Phase 2 — Database & Authentication:** In Progress
+> **Phase 2 — Database & Authentication:** Completed
 
 ### Currently Implemented
 
