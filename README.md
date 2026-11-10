@@ -577,8 +577,8 @@ Additional relationships, including ticket assignment to agents and conversation
 
 ### Phase 3 — Ticket Management
 
-- [ ] Create ticket APIs
-- [ ] Implement ticket creation
+- [x] Create ticket APIs
+- [x] Implement ticket creation
 - [ ] Implement ticket assignment
 - [ ] Implement status and priority management
 - [ ] Implement ticket comments
