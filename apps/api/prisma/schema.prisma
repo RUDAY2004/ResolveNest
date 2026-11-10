@@ -8,6 +8,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
 model User {
   id        String   @id @default(uuid())
   name      String
@@ -16,23 +17,26 @@ model User {
   role      UserRole @default(CUSTOMER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  tickets   Ticket[]
+  tickets         Ticket[] @relation("CustomerTickets")
+  assignedTickets Ticket[] @relation("AssignedTickets")
 }
-
 model Ticket {
-  id          String       @id @default(uuid())
+  id          String         @id @default(uuid())
   title       String
   description String
-  status      TicketStatus @default(OPEN)
+  status      TicketStatus  @default(OPEN)
   priority    TicketPriority @default(MEDIUM)
 
   customerId  String
-  customer    User         @relation(fields: [customerId], references: [id])
+  customer    User           @relation("CustomerTickets", fields: [customerId], references: [id])
 
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
+  assignedAgentId String?
+  assignedAgent   User?      @relation("AssignedTickets", fields: [assignedAgentId], references: [id])
+
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
+
 
 enum UserRole {
   CUSTOMER
